@@ -26,12 +26,12 @@ const server = createServer(async (request, response) => {
   const webRequest = new Request(url, {
     method: request.method,
     headers: new Headers(
-      Object.entries(request.headers).flatMap(([key, value]) => {
+      Object.entries(request.headers).flatMap<[string, string]>(([key, value]) => {
         if (Array.isArray(value)) {
           return value.map((entry) => [key, entry] as [string, string]);
         }
 
-        return value ? [[key, value] as [string, string]] : [];
+        return value ? [[key, value]] : [];
       })
     ),
     body
