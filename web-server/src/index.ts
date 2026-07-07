@@ -20,6 +20,4 @@ export const handleRequest = async (request: Request) => {
   return withCors(request, response, allowedOrigins);
 };
 
-export default Object.assign(app, {
-  fetch: handleRequest
-});
+export default app;
