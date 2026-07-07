@@ -1,0 +1,17 @@
+{
+  "name": "key-assignment",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter web-server --filter web-client dev",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "db:setup": "pnpm --filter web-server db:push && pnpm --filter web-server db:seed"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}

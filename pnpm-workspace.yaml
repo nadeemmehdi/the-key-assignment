@@ -1,0 +1,6 @@
+packages:
+  - web-client
+  - web-server
+allowBuilds:
+  esbuild: true
+  sharp: true
