@@ -7,7 +7,9 @@ import { ForumService } from "../service/forum.service";
 const requireAuth = (headers: Record<string, string | undefined>) => {
   const auth = resolveAuthContext(
     new Headers(
-      Object.entries(headers).flatMap(([key, value]) => (value ? [[key, value]] : []))
+      Object.entries(headers).flatMap<[string, string]>(([key, value]) =>
+        value ? [[key, value]] : []
+      )
     )
   );
 
