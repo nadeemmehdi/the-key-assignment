@@ -1,6 +1,6 @@
-import { loadEnvFile } from "../shared/config/env-file";
-import { db } from "./client";
-import { courses, enrollments, posts, savedPosts, users } from "./schema";
+import { loadEnvFile } from "../shared/config/env-file.js";
+import { db } from "./client.js";
+import { courses, enrollments, posts, savedPosts, users } from "./schema.js";
 
 loadEnvFile();
 

@@ -1,15 +1,22 @@
 import { createServer } from "node:http";
-import { loadEnvFile } from "./shared/config/env-file";
+import { loadEnvFile } from "./shared/config/env-file.js";
 
 loadEnvFile();
 
-const [{ createApp }, { getEnv }] = await Promise.all([import("./app"), import("./shared/config/env")]);
+const [{ createApp }, { getEnv }, { getCorsHeaders }] = await Promise.all([
+  import("./app.js"),
+  import("./shared/config/env.js"),
+  import("./shared/http/cors.js")
+]);
 
-const { PORT } = getEnv();
+const { PORT, CORS_ALLOWED_ORIGINS } = getEnv();
 const app = createApp();
+const allowedOrigins = CORS_ALLOWED_ORIGINS.split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
 const readRequestBody = async (request: import("node:http").IncomingMessage) => {
-  if (request.method === "GET" || request.method === "HEAD") {
+  if (request.method === "GET" || request.method === "HEAD" || request.method === "OPTIONS") {
     return undefined;
   }
 
@@ -22,7 +29,28 @@ const readRequestBody = async (request: import("node:http").IncomingMessage) => 
   return chunks.length > 0 ? Buffer.concat(chunks) : undefined;
 };
 
+const applyCorsHeaders = (
+  response: import("node:http").ServerResponse,
+  requestOrigin: string | null
+) => {
+  const corsHeaders = getCorsHeaders(requestOrigin, allowedOrigins);
+
+  for (const [key, value] of Object.entries(corsHeaders)) {
+    response.setHeader(key, value);
+  }
+};
+
 const server = createServer(async (request, response) => {
+  const requestOrigin = typeof request.headers.origin === "string" ? request.headers.origin : null;
+
+  applyCorsHeaders(response, requestOrigin);
+
+  if (request.method === "OPTIONS") {
+    response.statusCode = 204;
+    response.end();
+    return;
+  }
+
   const origin = `http://${request.headers.host ?? `localhost:${PORT}`}`;
   const url = new URL(request.url ?? "/", origin);
   const body = await readRequestBody(request);

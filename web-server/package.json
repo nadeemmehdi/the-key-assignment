@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/dev-server.ts",
-    "build": "tsc --project tsconfig.json",
+    "build": "esbuild src/dev-server.ts --bundle --platform=node --format=esm --outfile=dist/server.js",
     "test": "vitest run",
     "db:push": "drizzle-kit push",
     "db:seed": "tsx src/db/seed.ts"
@@ -20,6 +20,7 @@
     "@types/pg": "^8.20.0",
     "drizzle-kit": "^0.31.10",
     "esbuild": "^0.28.1",
+    "typescript": "^6.0.3",
     "tsx": "^4.23.0",
     "vitest": "^4.1.10"
   }

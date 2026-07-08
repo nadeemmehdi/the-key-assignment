@@ -1,8 +1,8 @@
 import { Elysia } from "elysia";
-import { resolveAuthContext } from "../../../shared/auth/auth-context";
-import { HttpError } from "../../../shared/errors/http-error";
-import { courseFeedQuerySchema, paginationQuerySchema, savePostParamsSchema } from "../dto/feed.dto";
-import { ForumService } from "../service/forum.service";
+import { resolveAuthContext } from "../../../shared/auth/auth-context.js";
+import { HttpError } from "../../../shared/errors/http-error.js";
+import { courseFeedQuerySchema, paginationQuerySchema, savePostParamsSchema } from "../dto/feed.dto.js";
+import { ForumService } from "../service/forum.service.js";
 
 const requireAuth = (headers: Record<string, string | undefined>) => {
   const auth = resolveAuthContext(

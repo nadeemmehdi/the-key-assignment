@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { paginatedForumPostsSchema } from "./post.dto";
+import { paginatedForumPostsSchema } from "./post.dto.js";
 
 export const saveToggleResponseSchema = z.object({
   postId: z.string(),
@@ -8,4 +8,3 @@ export const saveToggleResponseSchema = z.object({
 });
 
 export const savedPostsResponseSchema = paginatedForumPostsSchema;
-

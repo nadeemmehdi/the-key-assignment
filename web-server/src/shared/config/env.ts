@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { buildDatabaseUrl } from "./database-url";
+import { buildDatabaseUrl } from "./database-url.js";
 
 const envSchema = z.object({
   DATABASE_URL: z.string().min(1).optional(),

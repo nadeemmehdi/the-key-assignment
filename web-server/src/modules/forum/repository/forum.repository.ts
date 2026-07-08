@@ -1,11 +1,11 @@
 import { and, count, desc, eq, inArray, isNull, sql } from "drizzle-orm";
-import { db } from "../../../db/client";
-import { courses, enrollments, posts, savedPosts } from "../../../db/schema";
-import type { AuthContext } from "../../../shared/auth/auth-context";
-import type { ForumPostViewEntity } from "../entities/forum-post-view.entity";
-import type { PostEntity } from "../entities/post.entity";
-import type { SavedPostEntity } from "../entities/saved-post.entity";
-import { mapCourseRow, mapEnrollmentRow, mapForumPostViewRow, mapPostRow, mapSavedPostRow } from "./forum.entity-mappers";
+import { db } from "../../../db/client.js";
+import { courses, enrollments, posts, savedPosts } from "../../../db/schema.js";
+import type { AuthContext } from "../../../shared/auth/auth-context.js";
+import type { ForumPostViewEntity } from "../entities/forum-post-view.entity.js";
+import type { PostEntity } from "../entities/post.entity.js";
+import type { SavedPostEntity } from "../entities/saved-post.entity.js";
+import { mapCourseRow, mapEnrollmentRow, mapForumPostViewRow, mapPostRow, mapSavedPostRow } from "./forum.entity-mappers.js";
 
 export class ForumRepository {
   async isUserEnrolled(userId: string, courseId: string): Promise<boolean> {

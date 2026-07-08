@@ -1,10 +1,10 @@
-import type { Role } from "../../../shared/auth/auth-context";
-import type { CourseEntity } from "../entities/course.entity";
-import type { EnrollmentEntity } from "../entities/enrollment.entity";
-import type { ForumPostViewEntity } from "../entities/forum-post-view.entity";
-import type { PostEntity } from "../entities/post.entity";
-import type { SavedPostEntity } from "../entities/saved-post.entity";
-import type { UserEntity } from "../entities/user.entity";
+import type { Role } from "../../../shared/auth/auth-context.js";
+import type { CourseEntity } from "../entities/course.entity.js";
+import type { EnrollmentEntity } from "../entities/enrollment.entity.js";
+import type { ForumPostViewEntity } from "../entities/forum-post-view.entity.js";
+import type { PostEntity } from "../entities/post.entity.js";
+import type { SavedPostEntity } from "../entities/saved-post.entity.js";
+import type { UserEntity } from "../entities/user.entity.js";
 
 export const mapCourseRow = (row: { id: string; title: string }): CourseEntity => ({
   id: row.id,

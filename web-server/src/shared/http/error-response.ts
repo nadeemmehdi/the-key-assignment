@@ -1,4 +1,4 @@
-import { HttpError } from "../errors/http-error";
+import { HttpError } from "../errors/http-error.js";
 
 export const toErrorResponse = (error: unknown) => {
   if (error instanceof HttpError) {
@@ -23,4 +23,3 @@ export const toErrorResponse = (error: unknown) => {
     }
   };
 };
-

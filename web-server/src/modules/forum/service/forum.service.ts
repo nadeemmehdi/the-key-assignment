@@ -1,9 +1,9 @@
-import type { AuthContext } from "../../../shared/auth/auth-context";
-import { HttpError } from "../../../shared/errors/http-error";
-import { ForumRepository } from "../repository/forum.repository";
-import type { CourseFeedQueryDto } from "../dto/feed.dto";
-import type { ForumPostDto } from "../dto/post.dto";
-import { decideSaveAction } from "../schemas/save-policy";
+import type { AuthContext } from "../../../shared/auth/auth-context.js";
+import { HttpError } from "../../../shared/errors/http-error.js";
+import { ForumRepository } from "../repository/forum.repository.js";
+import type { CourseFeedQueryDto } from "../dto/feed.dto.js";
+import type { ForumPostDto } from "../dto/post.dto.js";
+import { decideSaveAction } from "../schemas/save-policy.js";
 
 const toDto = (post: {
   id: string;
