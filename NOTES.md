@@ -1,5 +1,12 @@
 # Notes
 
+This file is supplemental. Use `README.md` as the source of truth for:
+
+- local setup
+- Vercel deployment
+- hosted database seeding
+- required environment variables
+
 ## Setup steps
 
 ```bash
@@ -16,7 +23,7 @@ pnpm --filter web-server dev
 # start the UI
 pnpm --filter web-client dev
 
-# run unit + API tests
+# run tests
 pnpm test
 ```
 
@@ -26,6 +33,8 @@ The project also supports starting both apps together with:
 pnpm dev
 ```
 
+Note: local `.env` should stay aligned with `.env.example`. Production credentials should live in Vercel project environment variables, not in local `.env`.
+
 ## Key decisions
 
 - Used a `pnpm` workspace with `web-client` and `web-server` to keep frontend and backend isolated while sharing Node and TypeScript configuration.
@@ -33,6 +42,8 @@ pnpm dev
 - Saved posts use a single record per `(userId, postId)` with `deletedAt` soft delete semantics. Re-saving reactivates the existing row instead of creating a duplicate.
 - Feed and saved-list responses return `hasSaved` and `savesCount` from the backend so UI components stay presentation-focused.
 - Client strings live in a simple catalog with English and Spanish, including pluralized save-count labels.
+- Production deployment uses two separate Vercel projects: `web-server` and `web-client`.
+- The backend is exposed through a Vercel function entrypoint plus rewrites instead of a long-running custom Node server process.
 
 ## Trade-offs
 
@@ -40,6 +51,7 @@ pnpm dev
 - Authentication is intentionally stubbed through headers rather than session or signed token verification.
 - Pagination is included in the API contract but kept minimal in the UI.
 - Next.js is configured to run with Webpack in dev/build because Turbopack workspace-root resolution was unstable in this local setup.
+- Backend tests still depend on prepared database state, so deployment confidence currently comes more from integration verification than from fully isolated automated tests.
 
 ## If I had another day
 
