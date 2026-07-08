@@ -74,6 +74,17 @@ DATABASE_URL=postgres://USER:PASSWORD@HOST:PORT/DBNAME?sslmode=require&uselibpqc
 DATABASE_URL=postgres://USER:PASSWORD@HOST:PORT/DBNAME?sslmode=require&uselibpqcompat=true pnpm --filter web-server db:seed
 ```
 
+### Hosted DB Seeding
+
+Seeding does not run automatically on Vercel deploys. When you create a fresh hosted database, run the schema push and seed commands manually from your machine against the hosted `DATABASE_URL`:
+
+```bash
+DATABASE_URL=postgres://USER:PASSWORD@HOST:PORT/DBNAME?sslmode=require&uselibpqcompat=true pnpm --filter web-server db:push
+DATABASE_URL=postgres://USER:PASSWORD@HOST:PORT/DBNAME?sslmode=require&uselibpqcompat=true pnpm --filter web-server db:seed
+```
+
+`db:push` creates or updates the schema. `db:seed` inserts the demo users, courses, enrollments, posts, and saved posts.
+
 ### `web-client`
 
 Deploy from the `web-client` directory:
