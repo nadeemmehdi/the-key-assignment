@@ -1,6 +1,9 @@
 import { createServer } from "node:http";
-import { createApp } from "./app";
-import { getEnv } from "./shared/config/env";
+import { loadEnvFile } from "./shared/config/env-file";
+
+loadEnvFile();
+
+const [{ createApp }, { getEnv }] = await Promise.all([import("./app"), import("./shared/config/env")]);
 
 const { PORT } = getEnv();
 const app = createApp();

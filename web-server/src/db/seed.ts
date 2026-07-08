@@ -1,5 +1,8 @@
+import { loadEnvFile } from "../shared/config/env-file";
 import { db } from "./client";
 import { courses, enrollments, posts, savedPosts, users } from "./schema";
+
+loadEnvFile();
 
 const now = new Date("2026-01-01T10:00:00.000Z");
 

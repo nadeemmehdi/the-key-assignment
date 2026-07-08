@@ -1,5 +1,8 @@
 import { beforeAll, describe, expect, it } from "vitest";
+import { loadEnvFile } from "../../../shared/config/env-file";
 import { createApp } from "../../../app";
+
+loadEnvFile();
 
 const app = createApp();
 
