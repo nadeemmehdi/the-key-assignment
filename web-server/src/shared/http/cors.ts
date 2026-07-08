@@ -36,25 +36,7 @@ export const getCorsHeaders = (requestOrigin: string | null, allowedOrigins: str
     ...(resolvedOrigin ? { "access-control-allow-origin": resolvedOrigin } : {}),
     "access-control-allow-methods": defaultAllowedMethods,
     "access-control-allow-headers": defaultAllowedHeaders,
+    "access-control-allow-credentials": "true",
     vary: "Origin"
   };
-};
-
-export const withCors = async (
-  request: Request,
-  response: Response,
-  allowedOrigins: string[]
-) => {
-  const headers = new Headers(response.headers);
-  const corsHeaders = getCorsHeaders(request.headers.get("origin"), allowedOrigins);
-
-  Object.entries(corsHeaders).forEach(([key, value]) => {
-    headers.set(key, value);
-  });
-
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers
-  });
 };

@@ -1,8 +1,9 @@
 import { createServer } from "node:http";
-import { handleRequest } from "./index";
+import { createApp } from "./app";
 import { getEnv } from "./shared/config/env";
 
 const { PORT } = getEnv();
+const app = createApp();
 
 const readRequestBody = async (request: import("node:http").IncomingMessage) => {
   if (request.method === "GET" || request.method === "HEAD") {
@@ -37,7 +38,7 @@ const server = createServer(async (request, response) => {
     body
   });
 
-  const webResponse = await handleRequest(webRequest);
+  const webResponse = await app.handle(webRequest);
   response.statusCode = webResponse.status;
 
   webResponse.headers.forEach((value, key) => {
