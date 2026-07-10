@@ -75,16 +75,9 @@ export const ForumDashboard = ({ health, view }: ForumDashboardProps) => {
     setFeedPage(1);
   }, [courseId]);
 
-  const feedQuery = useForumFeed(courseId, selectedUser, feedPage, feedPageSize, view === "feed");
-  const savedPostsQuery = useSavedPosts(selectedUser, savedPage, savedPageSize, view === "saved");
-  const toggleMutation = useSaveToggle(
-    courseId,
-    selectedUser,
-    feedPage,
-    feedPageSize,
-    savedPage,
-    savedPageSize
-  );
+  const feedQuery = useForumFeed(courseId, selectedUser, feedPage, feedPageSize, true);
+  const savedPostsQuery = useSavedPosts(selectedUser, savedPage, savedPageSize, true);
+  const toggleMutation = useSaveToggle(courseId, selectedUser);
   const removeMutation = useRemovePost(courseId, selectedUser);
   const feedItems = feedQuery.data?.items ?? [];
   const savedItems = savedPostsQuery.data?.items ?? [];
